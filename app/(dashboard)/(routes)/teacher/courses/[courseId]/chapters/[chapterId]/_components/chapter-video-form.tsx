@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 import { Pencil, PlusCircle, Video } from "lucide-react";
 import { Chapter, MuxData } from "@prisma/client";
-import Image from "next/image";
+import MuxPlayer from "@mux/mux-player-react";
 import { FileUpload } from "@/components/file-upload";
 
 interface ChapterVideoFormProps {
@@ -74,7 +74,16 @@ const ChapterVideoForm = ({
             <Video className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
-          <div className="relative aspect-video mt-2">Video Uploaded!</div>
+          <div className="relative aspect-video mt-2">
+            <MuxPlayer
+              streamType="on-demand"
+              playbackId={initialData?.muxData?.playbackId || ""}
+              metadataVideoTitle="Placeholder"
+              metadataViewerUserId="Placeholder"
+              primaryColor="#FFFFFF"
+              secondaryColor="#000000"
+            />
+          </div>
         ))}
       {isEditing && (
         <div>
